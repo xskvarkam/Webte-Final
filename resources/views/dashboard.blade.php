@@ -1,24 +1,64 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <div style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        ">
+            <h2 style="
+                font-size: 1.75rem;
+                color: white;
+                font-weight: bold;
+                margin: 0;
+            ">
+                Dashboard
+            </h2>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-8 text-center text-gray-900 dark:text-gray-100">
-                <h1 class="text-2xl font-bold mb-4">{{ __("You're logged in!") }}</h1>
+    <style>
+        .dashboard-box {
+            background-color: #2d3748;
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 2rem auto;
+        }
 
-                <p class="mb-6 text-lg text-gray-700 dark:text-gray-300">
-                    Use the button below to access the PDF tools.
-                </p>
+        .dashboard-box h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
 
-                <a href="{{ route('pdf.index') }}"
-                   class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
-                    ➤ Go to PDF Tools
-                </a>
-            </div>
-        </div>
+        .dashboard-box p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #e2e8f0;
+        }
+
+        .dashboard-box a {
+            background-color: #3182ce;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .dashboard-box a:hover {
+            background-color: #2b6cb0;
+        }
+    </style>
+
+    <div class="dashboard-box">
+        <h1>You're logged in!</h1>
+        <p>Welcome back! Click the button below to explore your PDF tools.</p>
+        <a href="{{ route('pdf.index') }}">➤ Go to PDF Tools</a>
     </div>
 </x-app-layout>
