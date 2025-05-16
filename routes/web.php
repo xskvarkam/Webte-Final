@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PdfController;
-use App\Http\Controllers\Api\HistoryLogController;
+use App\Http\Controllers\Admin\HistoryLogController;
 use App\Http\Controllers\Frontend\PdfEditController;
 use App\Http\Controllers\Frontend\PdfMergeController;
 use App\Http\Controllers\Frontend\PdfSplitController;
@@ -14,6 +14,8 @@ use App\Http\Controllers\Frontend\PdfWatermarkController;
 use App\Http\Controllers\Frontend\PdfCompressController;
 use App\Http\Controllers\Frontend\PdfReverseController;
 use App\Http\Controllers\Frontend\PdfSignController;
+
+use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -57,6 +59,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/tools/sign', [PdfSignController::class, 'index'])->name('pdf.sign');
     Route::post('/tools/sign', [PdfSignController::class, 'process'])->name('pdf.sign.process');
-});
 
+
+});
+Route::middleware(['auth', AdminMiddleware::class])
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/history', [HistoryLogController::class, 'index'])->name('admin.history.index');
+        Route::get('/history/export', [HistoryLogController::class, 'export'])->name('admin.history.export');
+    });
 require __DIR__.'/auth.php';

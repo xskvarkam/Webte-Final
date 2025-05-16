@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\HistoryLog;
+use Illuminate\Support\Facades\Http;
 class PdfCompressController extends Controller
 {
     public function index()
@@ -14,10 +15,21 @@ class PdfCompressController extends Controller
 
     public function process(Request $request)
     {
+
         $request->validate([
             'pdf' => 'required|file|mimes:pdf'
         ]);
+        $user = auth()->user();
+        $ip = request()->ip();
+        $location = Http::get("http://ip-api.com/json/{$ip}")->json();
 
+        HistoryLog::create([
+            'user_id' => $user->id,
+            'action' => 'compress',
+            'location_state' => $location['country'] ?? null,
+            'location_city' => $location['city'] ?? null,
+            'used_from' => request()->is('api/*') ? 'backend' : 'frontend',
+        ]);
         $filename = 'compress_' . time() . '.pdf';
         $request->file('pdf')->storeAs('temp', $filename);
 

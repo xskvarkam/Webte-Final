@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\HistoryLog;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
 class PdfMergeController extends Controller
 {
     public function index()
@@ -14,11 +15,22 @@ class PdfMergeController extends Controller
 
     public function process(Request $request)
     {
+
         $request->validate([
             'pdf1' => 'required|file|mimes:pdf',
             'pdf2' => 'required|file|mimes:pdf'
         ]);
+        $user = auth()->user();
+        $ip = request()->ip();
+        $location = Http::get("http://ip-api.com/json/{$ip}")->json();
 
+        HistoryLog::create([
+            'user_id' => $user->id,
+            'action' => 'merge',
+            'location_state' => $location['country'] ?? null,
+            'location_city' => $location['city'] ?? null,
+            'used_from' => request()->is('api/*') ? 'backend' : 'frontend',
+        ]);
         // Create unique filenames
         $filename1 = 'input1_' . time() . '.pdf';
         $filename2 = 'input2_' . time() . '.pdf';

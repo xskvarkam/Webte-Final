@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\HistoryLog;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
 class PdfSignController extends Controller
 {
     public function index()
@@ -14,11 +15,22 @@ class PdfSignController extends Controller
 
     public function process(Request $request)
     {
+
         $request->validate([
             'pdf' => 'required|file|mimes:pdf',
             'signature' => 'required|string|max:100'
         ]);
+        $user = auth()->user();
+        $ip = request()->ip();
+        $location = Http::get("http://ip-api.com/json/{$ip}")->json();
 
+        HistoryLog::create([
+            'user_id' => $user->id,
+            'action' => 'sign',
+            'location_state' => $location['country'] ?? null,
+            'location_city' => $location['city'] ?? null,
+            'used_from' => request()->is('api/*') ? 'backend' : 'frontend',
+        ]);
         $filename = 'sign_' . time() . '.pdf';
         $request->file('pdf')->storeAs('temp', $filename);
 

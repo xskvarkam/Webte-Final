@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\HistoryLog;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
 class PdfWatermarkController extends Controller
 {
     public function index()
@@ -18,7 +19,17 @@ class PdfWatermarkController extends Controller
             'pdf' => 'required|file|mimes:pdf',
             'text' => 'required|string|max:100'
         ]);
+        $user = auth()->user();
+        $ip = request()->ip();
+        $location = Http::get("http://ip-api.com/json/{$ip}")->json();
 
+        HistoryLog::create([
+            'user_id' => $user->id,
+            'action' => 'watermark',
+            'location_state' => $location['country'] ?? null,
+            'location_city' => $location['city'] ?? null,
+            'used_from' => request()->is('api/*') ? 'backend' : 'frontend',
+        ]);
         $filename = 'watermark_' . time() . '.pdf';
         $request->file('pdf')->storeAs('temp', $filename);
 
