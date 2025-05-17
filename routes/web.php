@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile/api-token', [ProfileController::class, 'generateToken'])->name('profile.generate-token');
+    
     Route::get('/pdf-tools', [PdfController::class, 'index'])->name('pdf.index');
     Route::post('/pdf-upload', [PdfController::class, 'upload'])->name('pdf.upload');
     Route::middleware(['auth'])->post('/log-history', [HistoryLogController::class, 'store'])->name('log.history');
@@ -71,6 +73,9 @@ Route::middleware('auth')->group(function () {
         return redirect()->back();
     })->name('set-locale');
 
+});
+Route::get('/docs', function () {
+    return view('swagger');
 });
 Route::middleware(['auth', AdminMiddleware::class])
     ->prefix('admin')

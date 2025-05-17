@@ -24,6 +24,21 @@
                     @include('profile.partials.delete-user-form')
                 </div>
             </div>
+            @if (session('token'))
+                <div class="mt-2 text-sm text-green-600">
+                    Your API Token: <code>{{ session('token') }}</code>
+                    <p class="text-xs text-red-500 mt-1">Copy this now. It won’t be shown again!</p>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('profile.generate-token') }}">
+                @csrf
+                <button class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-500 transition">
+                    Generate New API Token
+                </button>
+            </form>
         </div>
+
+
     </div>
 </x-app-layout>

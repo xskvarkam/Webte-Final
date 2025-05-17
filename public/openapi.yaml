@@ -1,0 +1,319 @@
+openapi: 3.0.3
+info:
+  title: Laravel PDF Tools API
+  description: API for PDF manipulation operations like watermarking, merging, editing metadata, etc.
+  version: 1.0.0
+servers:
+  - url: https://node107.webte.fei.stuba.sk/api
+    description: Production server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    PDFUpload:
+      type: object
+      properties:
+        pdf:
+          type: string
+          format: binary
+    PDFWithText:
+      allOf:
+        - $ref: '#/components/schemas/PDFUpload'
+        - type: object
+          properties:
+            text:
+              type: string
+              example: Sample watermark
+    PDFWithTitleAuthor:
+      allOf:
+        - $ref: '#/components/schemas/PDFUpload'
+        - type: object
+          properties:
+            title:
+              type: string
+            author:
+              type: string
+
+paths:
+  /pdf/watermark:
+    post:
+      tags:
+        - PDF Tools
+      summary: Add watermark to a PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PDFWithText'
+      responses:
+        '200':
+          description: Watermarked PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Watermarking failed
+      security:
+        - bearerAuth: []
+
+  /pdf/edit:
+    post:
+      tags:
+        - PDF Tools
+      summary: Edit metadata of a PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PDFWithTitleAuthor'
+      responses:
+        '200':
+          description: Edited PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Metadata edit failed
+      security:
+        - bearerAuth: []
+
+  /pdf/compress:
+    post:
+      tags:
+        - PDF Tools
+      summary: Compress a PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PDFUpload'
+      responses:
+        '200':
+          description: Compressed PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Compression failed
+      security:
+        - bearerAuth: []
+
+  /pdf/merge:
+    post:
+      tags:
+        - PDF Tools
+      summary: Merge two PDFs
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pdf1:
+                  type: string
+                  format: binary
+                pdf2:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Merged PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Merge failed
+      security:
+        - bearerAuth: []
+
+  /pdf/reverse:
+    post:
+      tags:
+        - PDF Tools
+      summary: Reverse pages in a PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PDFUpload'
+      responses:
+        '200':
+          description: Reversed PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Reverse failed
+      security:
+        - bearerAuth: []
+
+  /pdf/split:
+    post:
+      tags:
+        - PDF Tools
+      summary: Split a PDF by range
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pdf:
+                  type: string
+                  format: binary
+                range:
+                  type: string
+                  example: "1-2"
+      responses:
+        '200':
+          description: Split PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Split failed
+      security:
+        - bearerAuth: []
+
+  /pdf/delete:
+    post:
+      tags:
+        - PDF Tools
+      summary: Delete specific pages from a PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pdf:
+                  type: string
+                  format: binary
+                pages:
+                  type: string
+                  example: "1,3-4"
+      responses:
+        '200':
+          description: PDF with pages removed
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Delete failed
+      security:
+        - bearerAuth: []
+
+  /pdf/extract:
+    post:
+      tags:
+        - PDF Tools
+      summary: Extract text from PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PDFUpload'
+      responses:
+        '200':
+          description: Extracted text
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Text extraction failed
+      security:
+        - bearerAuth: []
+
+  /pdf/rotate:
+    post:
+      tags:
+        - PDF Tools
+      summary: Rotate PDF pages
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pdf:
+                  type: string
+                  format: binary
+                pages:
+                  type: string
+                  example: "1,3"
+                angle:
+                  type: string
+                  enum: ["90", "180", "270"]
+      responses:
+        '200':
+          description: Rotated PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Rotation failed
+      security:
+        - bearerAuth: []
+
+  /pdf/sign:
+    post:
+      tags:
+        - PDF Tools
+      summary: Digitally sign a PDF
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pdf:
+                  type: string
+                  format: binary
+                signature:
+                  type: string
+                  example: "John Doe"
+      responses:
+        '200':
+          description: Signed PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Signing failed
+      security:
+        - bearerAuth: []
+
