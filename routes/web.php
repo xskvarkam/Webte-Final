@@ -61,6 +61,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/tools/sign', [PdfSignController::class, 'process'])->name('pdf.sign.process');
 
 
+    Route::get('/set-locale', function (\Illuminate\Http\Request $request) {
+        $locale = $request->query('locale');
+
+        if (in_array($locale, ['en', 'sk'])) {
+            session(['locale' => $locale]);
+        }
+
+        return redirect()->back();
+    })->name('set-locale');
+
 });
 Route::middleware(['auth', AdminMiddleware::class])
     ->prefix('admin')

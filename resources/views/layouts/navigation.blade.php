@@ -22,6 +22,8 @@
                             </x-nav-link>
                         @endif
                     @endauth
+                    <a href="{{ route('set-locale', ['locale' => 'sk']) }}">SK</a>
+                    <a href="{{ route('set-locale', ['locale' => 'en']) }}">EN</a>
                 </div>
             </div>
 
