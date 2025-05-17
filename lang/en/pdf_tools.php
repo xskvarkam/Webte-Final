@@ -10,7 +10,7 @@ return [
         'extract' => 'Extract Text',
         'rotate' => 'Rotate Pages',
         'watermark' => 'Add Watermark',
-        'compress' => 'Compress PDF (NOT WORKING)',
+        'compress' => 'Compress PDF',
         'reverse' => 'Reverse Pages',
         'sign' => 'Sign PDF',
     ],

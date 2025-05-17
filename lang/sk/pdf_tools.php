@@ -10,7 +10,7 @@ return [
         'extract' => 'Extrahovať text',
         'rotate' => 'Otočiť strany',
         'watermark' => 'Pridať vodoznak',
-        'compress' => 'Komprimovať PDF (NEFUNGUJE)',
+        'compress' => 'Komprimovať PDF',
         'reverse' => 'Obrátiť strany',
         'sign' => 'Podpísať PDF',
     ],
