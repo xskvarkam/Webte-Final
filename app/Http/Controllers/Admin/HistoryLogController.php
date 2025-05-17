@@ -12,7 +12,7 @@ class HistoryLogController extends Controller
 {
     public function index()
     {
-        $logs = HistoryLog::latest()->paginate(20);
+        $logs = HistoryLog::with('user')->latest()->paginate(20);
         return view('admin.history.index', compact('logs'));
     }
 

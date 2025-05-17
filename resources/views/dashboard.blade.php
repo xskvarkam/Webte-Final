@@ -11,7 +11,7 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                Dashboard
+                {{ __('dashboard.title') }}
             </h2>
         </div>
     </x-slot>
@@ -57,8 +57,8 @@
     </style>
 
     <div class="dashboard-box">
-        <h1>You're logged in!</h1>
-        <p>Welcome back! Click the button below to explore your PDF tools.</p>
-        <a href="{{ route('pdf.index') }}">➤ Go to PDF Tools</a>
+        <h1>{{ __('dashboard.heading') }}</h1>
+        <p>{{ __('dashboard.description') }}</p>
+        <a href="{{ route('pdf.index') }}">➤ {{ __('dashboard.button') }}</a>
     </div>
 </x-app-layout>

@@ -13,4 +13,10 @@ class HistoryLog extends Model
         'location_city',
         'used_from',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

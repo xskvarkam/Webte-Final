@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 style="font-size: 2rem; text-align: center; color: white; font-weight: bold;">
-            PDF Tools
+            {{ __('pdf_tools.title') }}
         </h2>
     </x-slot>
 
@@ -46,22 +46,22 @@
     <div class="tool-grid">
         @php
             $tools = [
-                ['title' => 'Edit Metadata', 'route' => 'pdf.edit'],
-                ['title' => 'Merge PDFs', 'route' => 'pdf.merge'],
-                ['title' => 'Split PDF', 'route' => 'pdf.split'],
-                ['title' => 'Delete Pages', 'route' => 'pdf.delete'],
-                ['title' => 'Extract Text', 'route' => 'pdf.extract'],
-                ['title' => 'Rotate Pages', 'route' => 'pdf.rotate'],
-                ['title' => 'Add Watermark', 'route' => 'pdf.watermark'],
-                ['title' => 'Compress PDF(NEFUNGUJE)', 'route' => 'pdf.compress'],
-                ['title' => 'Reverse Pages', 'route' => 'pdf.reverse'],
-                ['title' => 'Sign PDF', 'route' => 'pdf.sign'],
+                ['key' => 'edit', 'route' => 'pdf.edit'],
+                ['key' => 'merge', 'route' => 'pdf.merge'],
+                ['key' => 'split', 'route' => 'pdf.split'],
+                ['key' => 'delete', 'route' => 'pdf.delete'],
+                ['key' => 'extract', 'route' => 'pdf.extract'],
+                ['key' => 'rotate', 'route' => 'pdf.rotate'],
+                ['key' => 'watermark', 'route' => 'pdf.watermark'],
+                ['key' => 'compress', 'route' => 'pdf.compress'],
+                ['key' => 'reverse', 'route' => 'pdf.reverse'],
+                ['key' => 'sign', 'route' => 'pdf.sign'],
             ];
         @endphp
 
         @foreach ($tools as $tool)
             <a href="{{ route($tool['route']) }}" class="tool-card">
-                {{ $tool['title'] }}
+                {{ __('pdf_tools.tools.' . $tool['key']) }}
             </a>
         @endforeach
     </div>

@@ -16,7 +16,7 @@
                 font-weight: bold;
                 transition: background-color 0.3s ease;
             " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                ← Back
+                {{ __('pdf_reverse.back') }}
             </a>
 
             <!-- Centered Title -->
@@ -29,7 +29,7 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                Reverse PDF Pages
+                {{ __('pdf_reverse.title') }}
             </h2>
 
             <!-- Right Spacer -->
@@ -114,11 +114,13 @@
             @csrf
 
             <div class="form-group">
-                <label for="pdf">Select PDF:</label>
+                <label for="pdf">{{ __('pdf_reverse.select_pdf') }}</label>
                 <input type="file" name="pdf" accept="application/pdf" required>
             </div>
 
-            <button type="submit" class="submit-btn">Reverse Pages</button>
+            <button type="submit" class="submit-btn">
+                {{ __('pdf_reverse.submit') }}
+            </button>
         </form>
     </div>
 </x-app-layout>

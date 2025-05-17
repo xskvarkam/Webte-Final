@@ -16,7 +16,7 @@
                 font-weight: bold;
                 transition: background-color 0.3s ease;
             " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                ← Back
+                {{ __('pdf_extract.back') }}
             </a>
 
             <!-- Centered Title -->
@@ -29,7 +29,7 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                Extract Text from PDF
+                {{ __('pdf_extract.title') }}
             </h2>
 
             <!-- Right Spacer -->
@@ -124,17 +124,19 @@
             @csrf
 
             <div class="form-group">
-                <label for="pdf">Select PDF:</label>
+                <label for="pdf">{{ __('pdf_extract.select_pdf') }}</label>
                 <input type="file" name="pdf" accept="application/pdf" required>
             </div>
 
-            <button type="submit" class="submit-btn">Extract Text</button>
+            <button type="submit" class="submit-btn">
+                {{ __('pdf_extract.submit') }}
+            </button>
         </form>
 
         @if(session('text'))
             <div style="margin-top: 2rem;">
                 <h3 style="font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;">
-                    Extracted Text:
+                    {{ __('pdf_extract.output_title') }}
                 </h3>
                 <pre class="output-box">{{ session('text') }}</pre>
             </div>

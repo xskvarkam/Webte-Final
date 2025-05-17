@@ -18,12 +18,21 @@
                     @auth
                         @if (auth()->user()?->role === 'admin')
                             <x-nav-link :href="route('admin.history.index')" :active="request()->routeIs('admin.history.index')">
-                                {{ __('History') }}
+                                {{ __('messages.History') }}
                             </x-nav-link>
                         @endif
                     @endauth
-                    <a href="{{ route('set-locale', ['locale' => 'sk']) }}">SK</a>
-                    <a href="{{ route('set-locale', ['locale' => 'en']) }}">EN</a>
+
+                </div>
+                <div class="flex items-center space-x-2 ml-4">
+                    <a href="{{ route('set-locale', ['locale' => 'sk']) }}"
+                       class="text-sm px-3 py-1 rounded-md bg-gray-700 text-white hover:bg-indigo-600 transition">
+                        SK
+                    </a>
+                    <a href="{{ route('set-locale', ['locale' => 'en']) }}"
+                       class="text-sm px-3 py-1 rounded-md bg-gray-700 text-white hover:bg-indigo-600 transition">
+                        EN
+                    </a>
                 </div>
             </div>
 

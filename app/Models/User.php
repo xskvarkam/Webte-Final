@@ -22,6 +22,11 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    public function getLocale(): string
+    {
+        return $this->locale ?? config('app.locale');
+    }
+
     public function isAdmin(): bool
     {
         return $this->email === 'admin@example.com'; // or use role column if you have one

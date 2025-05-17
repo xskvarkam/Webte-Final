@@ -16,7 +16,7 @@
                 font-weight: bold;
                 transition: background-color 0.3s ease;
             " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                ← Back
+                {{ __('pdf_merge.back') }}
             </a>
 
             <!-- Centered Title -->
@@ -29,7 +29,7 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                Merge Two PDFs
+                {{ __('pdf_merge.title') }}
             </h2>
 
             <!-- Right Spacer -->
@@ -96,16 +96,18 @@
             @csrf
 
             <div class="form-group">
-                <label for="pdf1">First PDF:</label>
+                <label for="pdf1">{{ __('pdf_merge.first_pdf') }}</label>
                 <input type="file" name="pdf1" accept="application/pdf" required>
             </div>
 
             <div class="form-group">
-                <label for="pdf2">Second PDF:</label>
+                <label for="pdf2">{{ __('pdf_merge.second_pdf') }}</label>
                 <input type="file" name="pdf2" accept="application/pdf" required>
             </div>
 
-            <button type="submit" class="submit-btn">Merge & Download</button>
+            <button type="submit" class="submit-btn">
+                {{ __('pdf_merge.submit') }}
+            </button>
         </form>
     </div>
 </x-app-layout>

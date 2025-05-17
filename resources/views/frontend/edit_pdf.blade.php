@@ -16,7 +16,7 @@
             font-weight: bold;
             transition: background-color 0.3s ease;
         " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                ← Back
+                {{ __('edit_pdf.back') }}
             </a>
 
             <!-- Center: Title -->
@@ -29,15 +29,13 @@
             font-weight: bold;
             margin: 0;
         ">
-                Edit PDF Metadata
+                {{ __('edit_pdf.title') }}
             </h2>
 
             <!-- Right: Invisible space filler to keep title centered -->
             <div style="width: 85px;"></div>
         </div>
     </x-slot>
-
-
 
     <style>
         .form-container {
@@ -104,21 +102,23 @@
             @csrf
 
             <div class="form-group">
-                <label for="pdf">Select PDF:</label>
+                <label for="pdf">{{ __('edit_pdf.select_pdf') }}</label>
                 <input type="file" name="pdf" accept="application/pdf" required>
             </div>
 
             <div class="form-group">
-                <label for="title">New Title:</label>
+                <label for="title">{{ __('edit_pdf.new_title') }}</label>
                 <input type="text" name="title" required>
             </div>
 
             <div class="form-group">
-                <label for="author">New Author:</label>
+                <label for="author">{{ __('edit_pdf.new_author') }}</label>
                 <input type="text" name="author">
             </div>
 
-            <button type="submit" class="submit-btn">Update Metadata</button>
+            <button type="submit" class="submit-btn">
+                {{ __('edit_pdf.submit') }}
+            </button>
         </form>
     </div>
 </x-app-layout>

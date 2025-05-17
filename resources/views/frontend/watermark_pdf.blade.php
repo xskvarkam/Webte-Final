@@ -16,7 +16,7 @@
                 font-weight: bold;
                 transition: background-color 0.3s ease;
             " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                ← Back
+                {{ __('pdf_watermark.back') }}
             </a>
 
             <!-- Centered Title -->
@@ -29,7 +29,7 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                Add Watermark to PDF
+                {{ __('pdf_watermark.title') }}
             </h2>
 
             <!-- Right Spacer -->
@@ -115,16 +115,18 @@
             @csrf
 
             <div class="form-group">
-                <label for="pdf">Select PDF:</label>
+                <label for="pdf">{{ __('pdf_watermark.select_pdf') }}</label>
                 <input type="file" name="pdf" accept="application/pdf" required>
             </div>
 
             <div class="form-group">
-                <label for="text">Watermark text:</label>
-                <input type="text" name="text" placeholder="e.g. CONFIDENTIAL" required>
+                <label for="text">{{ __('pdf_watermark.text_label') }}</label>
+                <input type="text" name="text" placeholder="{{ __('pdf_watermark.text_placeholder') }}" required>
             </div>
 
-            <button type="submit" class="submit-btn">Add Watermark</button>
+            <button type="submit" class="submit-btn">
+                {{ __('pdf_watermark.submit') }}
+            </button>
         </form>
     </div>
 </x-app-layout>

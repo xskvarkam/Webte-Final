@@ -16,7 +16,7 @@
                 font-weight: bold;
                 transition: background-color 0.3s ease;
             " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                ← Back
+                {{ __('delete_pdf.back') }}
             </a>
 
             <!-- Centered Title -->
@@ -29,7 +29,7 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                Delete Pages from PDF
+                {{ __('delete_pdf.title') }}
             </h2>
 
             <!-- Right Spacer -->
@@ -119,16 +119,16 @@
             @csrf
 
             <div class="form-group">
-                <label for="pdf">Select PDF:</label>
+                <label for="pdf">{{ __('delete_pdf.select_pdf') }}</label>
                 <input type="file" name="pdf" accept="application/pdf" required>
             </div>
 
             <div class="form-group">
-                <label for="pages">Pages to delete (e.g., 2,4-5):</label>
-                <input type="text" name="pages" placeholder="e.g. 2,4-5" required>
+                <label for="pages">{{ __('delete_pdf.pages_label') }}</label>
+                <input type="text" name="pages" placeholder="{{ __('delete_pdf.pages_placeholder') }}" required>
             </div>
 
-            <button type="submit" class="submit-btn">Delete Pages</button>
+            <button type="submit" class="submit-btn">{{ __('delete_pdf.submit') }}</button>
         </form>
     </div>
 </x-app-layout>

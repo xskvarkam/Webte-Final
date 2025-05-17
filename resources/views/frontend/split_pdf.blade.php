@@ -16,7 +16,7 @@
                 font-weight: bold;
                 transition: background-color 0.3s ease;
             " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                ← Back
+                {{ __('pdf_split.back') }}
             </a>
 
             <!-- Centered Title -->
@@ -29,7 +29,7 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                Split PDF
+                {{ __('pdf_split.title') }}
             </h2>
 
             <!-- Right Spacer -->
@@ -115,16 +115,18 @@
             @csrf
 
             <div class="form-group">
-                <label for="pdf">Select PDF:</label>
+                <label for="pdf">{{ __('pdf_split.select_pdf') }}</label>
                 <input type="file" name="pdf" accept="application/pdf" required>
             </div>
 
             <div class="form-group">
-                <label for="range">Page Range (e.g., 1-3):</label>
-                <input type="text" name="range" placeholder="e.g. 1-3" required>
+                <label for="range">{{ __('pdf_split.range_label') }}</label>
+                <input type="text" name="range" placeholder="{{ __('pdf_split.range_placeholder') }}" required>
             </div>
 
-            <button type="submit" class="submit-btn">Split PDF</button>
+            <button type="submit" class="submit-btn">
+                {{ __('pdf_split.submit') }}
+            </button>
         </form>
     </div>
 </x-app-layout>

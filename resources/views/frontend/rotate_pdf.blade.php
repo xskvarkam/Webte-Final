@@ -16,7 +16,7 @@
                 font-weight: bold;
                 transition: background-color 0.3s ease;
             " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                ← Back
+                {{ __('pdf_rotate.back') }}
             </a>
 
             <!-- Centered Title -->
@@ -29,7 +29,7 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                Rotate Pages in PDF
+                {{ __('pdf_rotate.title') }}
             </h2>
 
             <!-- Right Spacer -->
@@ -116,17 +116,17 @@
             @csrf
 
             <div class="form-group">
-                <label for="pdf">Select PDF:</label>
+                <label for="pdf">{{ __('pdf_rotate.select_pdf') }}</label>
                 <input type="file" name="pdf" accept="application/pdf" required>
             </div>
 
             <div class="form-group">
-                <label for="pages">Pages to rotate (e.g., 1-2,4):</label>
-                <input type="text" name="pages" placeholder="e.g. 1-2,4" required>
+                <label for="pages">{{ __('pdf_rotate.pages_label') }}</label>
+                <input type="text" name="pages" placeholder="{{ __('pdf_rotate.pages_placeholder') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="angle">Rotation angle:</label>
+                <label for="angle">{{ __('pdf_rotate.angle_label') }}</label>
                 <select name="angle" required>
                     <option value="90">90°</option>
                     <option value="180">180°</option>
@@ -134,7 +134,9 @@
                 </select>
             </div>
 
-            <button type="submit" class="submit-btn">Rotate PDF</button>
+            <button type="submit" class="submit-btn">
+                {{ __('pdf_rotate.submit') }}
+            </button>
         </form>
     </div>
 </x-app-layout>
