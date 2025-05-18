@@ -60,5 +60,11 @@
         <h1>{{ __('dashboard.heading') }}</h1>
         <p>{{ __('dashboard.description') }}</p>
         <a href="{{ route('pdf.index') }}">➤ {{ __('dashboard.button') }}</a>
+
+    </div>
+    <div class="dashboard-box">
+        <h1>{{ __('dashboard.docs_heading') }}</h1>
+        <p>{{ __('dashboard.docs_description') }}</p>
+        <a href="/docs">➤ {{ __('dashboard.docs_button') }}</a>
     </div>
 </x-app-layout>

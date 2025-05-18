@@ -19,7 +19,6 @@
                 {{ __('pdf_split.back') }}
             </a>
 
-            <!-- Centered Title -->
             <h2 style="
                 position: absolute;
                 left: 50%;
@@ -28,11 +27,12 @@
                 color: white;
                 font-weight: bold;
                 margin: 0;
+                text-align: center;
+                white-space: normal;
             ">
                 {{ __('pdf_split.title') }}
             </h2>
 
-            <!-- Right Spacer -->
             <div style="width: 85px;"></div>
         </div>
     </x-slot>
@@ -45,6 +45,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             max-width: 700px;
+            width: 96%;
             margin: 2rem auto;
         }
 
@@ -52,13 +53,20 @@
             margin-bottom: 1.5rem;
         }
 
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        .custom-upload-btn {
+            background-color: #4a5568 !important;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: 0.3s ease;
+            white-space: nowrap;
         }
 
-        input[type="file"],
+        .custom-upload-btn:hover {
+            background-color: #2d3748 !important;
+        }
+
         input[type="text"] {
             width: 100%;
             padding: 0.75rem;
@@ -71,8 +79,8 @@
 
         input:focus {
             outline: none;
-            border-color: #4299e1;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.4);
+            border-color: #f56565;
+            box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.4);
         }
 
         .submit-btn {
@@ -91,12 +99,38 @@
             background-color: #2b6cb0;
         }
 
+        .upload-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .file-info {
+            background-color: #edf2f7;
+            color: #1a202c;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            white-space: nowrap;
+            min-width: 0;
+            flex-grow: 1;
+        }
+
         .error-box {
             background-color: #fed7d7;
             color: #c53030;
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .submit-btn {
+                width: 100%;
+            }
         }
     </style>
 
@@ -111,14 +145,30 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('pdf.split.process') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('pdf.split.process') }}" enctype="multipart/form-data" x-data="{ fileName: '' }">
             @csrf
 
+            {{-- File upload --}}
             <div class="form-group">
-                <label for="pdf">{{ __('pdf_split.select_pdf') }}</label>
-                <input type="file" name="pdf" accept="application/pdf" required>
+                <label class="mb-2 block">{{ __('pdf_split.select_pdf') }}</label>
+
+                <div class="upload-row bg-gray-100 border border-gray-300 rounded px-3 py-2">
+                    <button type="button"
+                            @click="$refs.fileInput.click()"
+                            class="custom-upload-btn">
+                        {{ __('pdf_split.choose_button') }}
+                    </button>
+
+                    <span x-text="fileName || '{{ __('pdf_split.no_file') }}'" class="file-info truncate"></span>
+                </div>
+
+                <input type="file" name="pdf" accept="application/pdf" required
+                       class="hidden"
+                       x-ref="fileInput"
+                       @change="fileName = $refs.fileInput.files[0]?.name || ''" />
             </div>
 
+            {{-- Page range input --}}
             <div class="form-group">
                 <label for="range">{{ __('pdf_split.range_label') }}</label>
                 <input type="text" name="range" placeholder="{{ __('pdf_split.range_placeholder') }}" required>

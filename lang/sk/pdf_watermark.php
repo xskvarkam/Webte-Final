@@ -6,5 +6,7 @@ return [
     'select_pdf' => 'Vyberte PDF:',
     'text_label' => 'Text vodoznaku:',
     'text_placeholder' => 'napr. DÔVERNÉ',
+    'no_file' => 'Žiadny súbor nie je vybraný',
+    'choose_button' => 'Vybrať súbor',
     'submit' => 'Pridať vodoznak',
 ];
