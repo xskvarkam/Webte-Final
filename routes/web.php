@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\PdfFromImgController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PdfController;
@@ -66,6 +67,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/tools/pdf-to-img', [PdfToImgController::class, 'index'])->name('pdf.to_img');
     Route::post('/tools/pdf-to-img', [PdfToImgController::class, 'process'])->name('pdf.to_img.process');
 
+    Route::get('/tools/pdf-from-img', [PdfFromImgController::class, 'index'])->name('pdf.from_img');
+    Route::post('/tools/pdf-from-img', [PdfFromImgController::class, 'process'])->name('pdf.from_img.process');
 
     Route::get('/set-locale', function (\Illuminate\Http\Request $request) {
         $locale = $request->query('locale');

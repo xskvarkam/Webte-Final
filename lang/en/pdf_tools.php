@@ -13,6 +13,7 @@ return [
         'compress' => 'Compress PDF',
         'reverse' => 'Reverse Pages',
         'sign' => 'Sign PDF',
-        'to_img' => 'PDF to Images'
+        'to_img' => 'PDF to Images',
+        'from_img' => 'PDF from Images',
     ],
 ];

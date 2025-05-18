@@ -345,3 +345,34 @@ paths:
           description: Conversion failed
       security:
         - bearerAuth: [ ]
+
+  /pdf/from-img:
+    post:
+      tags:
+        - PDF Tools
+      summary: Create PDF from uploaded images
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                images:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: Array of JPG, JEPG, PNG images
+      responses:
+        '200':
+          description: Created PDF file from images
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Image to PDF conversion failed
+      security:
+        - bearerAuth: [ ]

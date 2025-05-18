@@ -13,6 +13,7 @@ return [
         'compress' => 'Komprimovať PDF',
         'reverse' => 'Obrátiť strany',
         'sign' => 'Podpísať PDF',
-        'to_img' => 'PDF na obrázky'
+        'to_img' => 'PDF na obrázky',
+        'from_img' => 'PDF z obrázkov'
     ],
 ];

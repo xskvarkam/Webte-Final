@@ -16,7 +16,7 @@
                 font-weight: bold;
                 transition: background-color 0.3s ease;
             " onmouseover="this.style.backgroundColor='#2d3748'" onmouseout="this.style.backgroundColor='#4a5568'">
-                {{ __('pdf_to_img.back') }}
+                {{ __('pdf_from_img.back') }}
             </a>
 
             <!-- Centered Title -->
@@ -29,10 +29,10 @@
                 font-weight: bold;
                 margin: 0;
             ">
-                {{ __('pdf_to_img.title') }}
+                {{ __('pdf_from_img.title') }}
             </h2>
 
-            <!-- Right Spacer -->
+            <!-- Spacer -->
             <div style="width: 85px;"></div>
         </div>
     </x-slot>
@@ -68,14 +68,8 @@
             font-size: 1rem;
         }
 
-        input:focus {
-            outline: none;
-            border-color: #48bb78;
-            box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.4);
-        }
-
         .submit-btn {
-            background-color: #38a169;
+            background-color: #38b2ac;
             color: white;
             font-weight: bold;
             padding: 0.75rem 1.5rem;
@@ -87,7 +81,7 @@
         }
 
         .submit-btn:hover {
-            background-color: #2f855a;
+            background-color: #319795;
         }
 
         .error-box {
@@ -110,16 +104,16 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('pdf.to_img.process') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('pdf.from_img.process') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
-                <label for="pdf">{{ __('pdf_to_img.select_pdf') }}</label>
-                <input type="file" name="pdf" accept="application/pdf" required>
+                <label for="images">{{ __('pdf_from_img.select_images') }}</label>
+                <input type="file" name="images[]" accept=".jpg,.jpeg,.png" multiple required>
             </div>
 
             <button type="submit" class="submit-btn">
-                {{ __('pdf_to_img.submit') }}
+                {{ __('pdf_from_img.submit') }}
             </button>
         </form>
     </div>

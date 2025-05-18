@@ -57,6 +57,7 @@
                 ['key' => 'reverse', 'route' => 'pdf.reverse'],
                 ['key' => 'sign', 'route' => 'pdf.sign'],
                 ['key' => 'to_img', 'route' => 'pdf.to_img'],
+                ['key' => 'from_img', 'route' => 'pdf.from_img']
             ];
         @endphp
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\PdfRotateApiController;
 use App\Http\Controllers\Api\PdfSignApiController;
 use App\Http\Controllers\Api\PdfSplitApiController;
 use App\Http\Controllers\Api\PdfWatermarkApiController;
+use App\Http\Controllers\Api\PdfFromImgApiController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pdf/edit', [PdfEditApiController::class, 'edit']);
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pdf/split', [PdfSplitApiController::class, 'split']);
     Route::post('/pdf/watermark', [PdfWatermarkApiController::class, 'watermark']);
     Route::post('/pdf/to-img', [PdfToImgApiController::class, 'convert']);
+    Route::post('/pdf/from-img', [PdfFromImgApiController::class, 'create']);
     // add others...
 });
 Route::get('/user', function (Request $request) {

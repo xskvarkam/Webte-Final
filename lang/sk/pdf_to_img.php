@@ -1,7 +1,7 @@
 <?php
 return[
     'title' => 'PDF na obrázky',
-    'back' => 'Späť',
+    'back' => '← Späť',
     'select_pdf' => 'Vyber PDF súbor',
     'submit' => 'Konvertuj na obrázky'
 ];
