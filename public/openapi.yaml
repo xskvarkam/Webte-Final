@@ -317,3 +317,31 @@ paths:
       security:
         - bearerAuth: []
 
+  /pdf/to_img:
+    post:
+      tags:
+        - PDF Tools
+      summary: Convert PDF to images (ZIP)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pdf:
+                  type: string
+                  format: binary
+                  description: PDF file to convert
+      responses:
+        '200':
+          description: ZIP file containing images of PDF pages
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Conversion failed
+      security:
+        - bearerAuth: [ ]

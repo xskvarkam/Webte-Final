@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\PdfWatermarkController;
 use App\Http\Controllers\Frontend\PdfCompressController;
 use App\Http\Controllers\Frontend\PdfReverseController;
 use App\Http\Controllers\Frontend\PdfSignController;
+use App\Http\Controllers\Frontend\PdfToImgController;
 
 use App\Http\Middleware\AdminMiddleware;
 
@@ -30,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile/api-token', [ProfileController::class, 'generateToken'])->name('profile.generate-token');
-    
+
     Route::get('/pdf-tools', [PdfController::class, 'index'])->name('pdf.index');
     Route::post('/pdf-upload', [PdfController::class, 'upload'])->name('pdf.upload');
     Route::middleware(['auth'])->post('/log-history', [HistoryLogController::class, 'store'])->name('log.history');
@@ -61,6 +62,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/tools/sign', [PdfSignController::class, 'index'])->name('pdf.sign');
     Route::post('/tools/sign', [PdfSignController::class, 'process'])->name('pdf.sign.process');
+
+    Route::get('/tools/pdf-to-img', [PdfToImgController::class, 'index'])->name('pdf.to_img');
+    Route::post('/tools/pdf-to-img', [PdfToImgController::class, 'process'])->name('pdf.to_img.process');
 
 
     Route::get('/set-locale', function (\Illuminate\Http\Request $request) {

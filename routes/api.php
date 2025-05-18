@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PdfToImgApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PdfDeleteApiController;
@@ -24,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pdf/sign', [PdfSignApiController::class, 'sign']);
     Route::post('/pdf/split', [PdfSplitApiController::class, 'split']);
     Route::post('/pdf/watermark', [PdfWatermarkApiController::class, 'watermark']);
+    Route::post('/pdf/to-img', [PdfToImgApiController::class, 'convert']);
     // add others...
 });
 Route::get('/user', function (Request $request) {
