@@ -89,9 +89,13 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.history.index')" :active="request()->routeIs('admin.history.index')">
-                {{ __('messages.History') }}
-            </x-responsive-nav-link>
+            @auth
+                @if (auth()->user()?->role === 'admin')
+                    <x-responsive-nav-link :href="route('admin.history.index')" :active="request()->routeIs('admin.history.index')">
+                        {{ __('messages.History') }}
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->

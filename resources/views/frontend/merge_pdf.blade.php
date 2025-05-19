@@ -21,19 +21,30 @@
             <h2 style="
                 position: absolute;
                 left: 50%;
-                transform: translateX(-50%);
+                top: 50%;
+                transform: translate(-50%, -50%);
                 font-size: 1.5rem;
                 color: white;
                 font-weight: bold;
                 margin: 0;
                 text-align: center;
-                white-space: normal;
+                line-height: 1.4;
+                padding: 0 1rem;
+                max-width: 90%;
+                word-break: break-word;
             ">
                 {{ __('pdf_merge.title') }}
             </h2>
 
             <div style="width: 85px;"></div>
         </div>
+        <style>
+            @media (max-width: 640px) {
+                h2 {
+                    font-size: 1.25rem !important;
+                }
+            }
+        </style>
     </x-slot>
 
     <style>
@@ -66,22 +77,6 @@
             background-color: #2d3748 !important;
         }
 
-        .submit-btn {
-            background-color: #38a169;
-            color: white;
-            font-weight: bold;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #2f855a;
-        }
-
         .upload-row {
             display: flex;
             gap: 1rem;
@@ -98,8 +93,26 @@
             font-size: 0.9rem;
             border: 1px solid #ccc;
             white-space: nowrap;
-            min-width: 0;
-            flex-grow: 1;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .submit-btn {
+            background-color: #38a169;
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #2f855a;
         }
 
         @media (max-width: 640px) {
@@ -115,7 +128,7 @@
 
             {{-- PDF 1 --}}
             <div class="form-group" x-data="{ fileName1: '' }">
-                <label class="mb-2 block">{{ __('pdf_merge.first_pdf') }}</label>
+                <label for="pdf1" class="mb-2 block">{{ __('pdf_merge.first_pdf') }}</label>
                 <div class="upload-row bg-gray-100 border border-gray-300 rounded px-3 py-2">
                     <button type="button"
                             @click="$refs.fileInput1.click()"
@@ -124,7 +137,7 @@
                     </button>
                     <span x-text="fileName1 || '{{ __('pdf_merge.no_file') }}'" class="file-info truncate"></span>
                 </div>
-                <input type="file" name="pdf1" accept="application/pdf" required
+                <input type="file" id="pdf1" name="pdf1" accept="application/pdf" required
                        class="hidden"
                        x-ref="fileInput1"
                        @change="fileName1 = $refs.fileInput1.files[0]?.name || ''" />
@@ -132,7 +145,7 @@
 
             {{-- PDF 2 --}}
             <div class="form-group" x-data="{ fileName2: '' }">
-                <label class="mb-2 block">{{ __('pdf_merge.second_pdf') }}</label>
+                <label for="pdf2" class="mb-2 block">{{ __('pdf_merge.second_pdf') }}</label>
                 <div class="upload-row bg-gray-100 border border-gray-300 rounded px-3 py-2">
                     <button type="button"
                             @click="$refs.fileInput2.click()"
@@ -141,7 +154,7 @@
                     </button>
                     <span x-text="fileName2 || '{{ __('pdf_merge.no_file') }}'" class="file-info truncate"></span>
                 </div>
-                <input type="file" name="pdf2" accept="application/pdf" required
+                <input type="file" id="pdf2" name="pdf2" accept="application/pdf" required
                        class="hidden"
                        x-ref="fileInput2"
                        @change="fileName2 = $refs.fileInput2.files[0]?.name || ''" />

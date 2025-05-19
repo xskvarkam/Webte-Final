@@ -21,19 +21,30 @@
             <h2 style="
                 position: absolute;
                 left: 50%;
-                transform: translateX(-50%);
+                top: 50%;
+                transform: translate(-50%, -50%);
                 font-size: 1.5rem;
                 color: white;
                 font-weight: bold;
                 margin: 0;
                 text-align: center;
-                white-space: normal;
+                line-height: 1.4;
+                padding: 0 1rem;
+                max-width: 90%;
+                word-break: break-word;
             ">
                 {{ __('pdf_compress.title') }}
             </h2>
 
             <div style="width: 85px;"></div>
         </div>
+        <style>
+            @media (max-width: 640px) {
+                h2 {
+                    font-size: 1.25rem !important;
+                }
+            }
+        </style>
     </x-slot>
 
     <style>
@@ -66,22 +77,6 @@
             background-color: #2d3748 !important;
         }
 
-        .submit-btn {
-            background-color: #38b2ac;
-            color: white;
-            font-weight: bold;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #319795;
-        }
-
         .upload-row {
             display: flex;
             gap: 1rem;
@@ -98,8 +93,26 @@
             font-size: 0.9rem;
             border: 1px solid #ccc;
             white-space: nowrap;
-            min-width: 0;
-            flex-grow: 1;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .submit-btn {
+            background-color: #38b2ac;
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #319795;
         }
 
         .error-box {
@@ -128,10 +141,10 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('pdf.compress.process') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('pdf.compress.process') }}" enctype="multipart/form-data" x-data="{ fileName: '' }">
             @csrf
 
-            <div class="form-group" x-data="{ fileName: '' }">
+            <div class="form-group">
                 <label class="mb-2 block">{{ __('pdf_compress.select_pdf') }}</label>
 
                 <div class="upload-row bg-gray-100 border border-gray-300 rounded px-3 py-2">

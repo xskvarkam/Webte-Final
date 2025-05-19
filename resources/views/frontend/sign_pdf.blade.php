@@ -21,19 +21,30 @@
             <h2 style="
                 position: absolute;
                 left: 50%;
-                transform: translateX(-50%);
+                top: 50%;
+                transform: translate(-50%, -50%);
                 font-size: 1.5rem;
                 color: white;
                 font-weight: bold;
                 margin: 0;
                 text-align: center;
-                white-space: normal;
+                line-height: 1.4;
+                padding: 0 1rem;
+                max-width: 90%;
+                word-break: break-word;
             ">
                 {{ __('pdf_sign.title') }}
             </h2>
 
             <div style="width: 85px;"></div>
         </div>
+        <style>
+            @media (max-width: 640px) {
+                h2 {
+                    font-size: 1.25rem !important;
+                }
+            }
+        </style>
     </x-slot>
 
     <style>
@@ -66,6 +77,28 @@
             background-color: #2d3748 !important;
         }
 
+        .upload-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .file-info {
+            background-color: #edf2f7;
+            color: #1a202c;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            white-space: nowrap;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         input[type="text"] {
             width: 100%;
             padding: 0.75rem;
@@ -96,26 +129,6 @@
 
         .submit-btn:hover {
             background-color: #65a30d;
-        }
-
-        .upload-row {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: nowrap;
-            align-items: center;
-            overflow-x: auto;
-        }
-
-        .file-info {
-            background-color: #edf2f7;
-            color: #1a202c;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            border: 1px solid #ccc;
-            white-space: nowrap;
-            min-width: 0;
-            flex-grow: 1;
         }
 
         .error-box {
@@ -168,7 +181,7 @@
 
             <div class="form-group">
                 <label for="signature">{{ __('pdf_sign.signature_label') }}</label>
-                <input type="text" name="signature" placeholder="{{ __('pdf_sign.signature_placeholder') }}" required>
+                <input type="text" id="signature" name="signature" placeholder="{{ __('pdf_sign.signature_placeholder') }}" required>
             </div>
 
             <button type="submit" class="submit-btn">
