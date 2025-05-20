@@ -23,6 +23,20 @@
             padding: 3rem 2rem;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .lang-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .lang-switch a {
+            color: #fff;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+            text-decoration: underline;
         }
 
         h1 {
@@ -56,11 +70,17 @@
 </head>
 <body>
 <div class="container">
-    <h1>Welcome to PDF Tools</h1>
-    <p>A simple place to manage your PDF files. Please log in or register to get started.</p>
+    <div class="lang-switch">
+        <a href="{{ route('set-locale', ['locale' => 'sk']) }}">| SK |</a>
+
+        <a href="{{ route('set-locale', ['locale' => 'en']) }}">| EN |</a>
+    </div>
+
+    <h1>{{ __('welcome.title') }}</h1>
+    <p>{{ __('welcome.description') }}</p>
     <div class="buttons">
-        <a href="{{ route('login') }}">Login</a>
-        <a href="{{ route('register') }}">Register</a>
+        <a href="{{ route('login') }}">{{ __('welcome.login') }}</a>
+        <a href="{{ route('register') }}">{{ __('welcome.register') }}</a>
     </div>
 </div>
 </body>

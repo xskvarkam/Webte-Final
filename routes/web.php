@@ -70,17 +70,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/tools/pdf-from-img', [PdfFromImgController::class, 'index'])->name('pdf.from_img');
     Route::post('/tools/pdf-from-img', [PdfFromImgController::class, 'process'])->name('pdf.from_img.process');
 
-    Route::get('/set-locale', function (\Illuminate\Http\Request $request) {
-        $locale = $request->query('locale');
 
-        if (in_array($locale, ['en', 'sk'])) {
-            session(['locale' => $locale]);
-        }
-
-        return redirect()->back();
-    })->name('set-locale');
 
 });
+Route::get('/set-locale', function (\Illuminate\Http\Request $request) {
+    $locale = $request->query('locale');
+
+    if (in_array($locale, ['en', 'sk'])) {
+        session(['locale' => $locale]);
+    }
+
+    return redirect()->back();
+})->name('set-locale');
 Route::get('/docs', function () {
     return view('swagger');
 });

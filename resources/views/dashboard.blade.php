@@ -26,6 +26,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             max-width: 600px;
             margin: 2rem auto;
+            box-sizing: border-box;
         }
 
         .dashboard-box h1 {
@@ -38,9 +39,11 @@
             font-size: 1.1rem;
             margin-bottom: 2rem;
             color: #e2e8f0;
+            padding: 0 1rem;
         }
 
         .dashboard-box a {
+            display: inline-block;
             background-color: #3182ce;
             color: white;
             padding: 0.75rem 1.5rem;
@@ -49,12 +52,38 @@
             text-decoration: none;
             font-size: 1rem;
             transition: background-color 0.3s ease;
+            max-width: 100%;
+            word-break: break-word;
+            text-align: center;
+
         }
 
         .dashboard-box a:hover {
             background-color: #2b6cb0;
         }
+
+        @media (max-width: 640px) {
+            .dashboard-box {
+                margin: 1.25rem 1rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .dashboard-box h1 { 
+                font-size: 1.5rem;
+            }
+
+            .dashboard-box p {
+                font-size: 1rem;
+            }
+
+            .dashboard-box a {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
+
 
     <div class="dashboard-box">
         <h1>{{ __('dashboard.heading') }}</h1>
