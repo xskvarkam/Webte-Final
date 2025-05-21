@@ -16,7 +16,7 @@ return [
     'instructions_split' => 'Split: this tool will ask for a PDF file and entrance of page range you want your PDF to be split into',
     'instructions_delete' => 'Delete: this tool will ask for a PDF file and entrance of page range you want to get rid of',
     'instructions_extract' => 'Extract: this tool will ask you to provide PDF file with text that will be extracted and ready to copy',
-    'instructions_rotate' => 'Rotate: this tool will ask you to import PDF, provide numbers of pages you want to rotate and enter degrees 0-359 you want the pages to be rotated by',
+    'instructions_rotate' => 'Rotate: this tool will ask you to import PDF, provide numbers of pages you want to rotate and enter degrees (90/180/270) you want the pages to be rotated by',
     'instructions_watermark' => 'Add Watermark: this tool will ask you for a PDF file and text of a watermark you want to put on the file',
     'instructions_compress' => 'Compress PDF: this tool makes the PDF file smaller in size',
     'instructions_reverse' => 'Reverse Pages: this tool will ask you to import PDF file of which contents will be reversed',
