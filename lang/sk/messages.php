@@ -34,5 +34,7 @@ return [
     'split' => 'Rozdeliť',
     'backend' => 'Backend',
     'frontend' => 'Frontend',
+    'clear_confirm' => 'Naozaj chcete zmazať históriu?',
+    'Clear_All_History' => 'Zmazať históriu',
 
 ];

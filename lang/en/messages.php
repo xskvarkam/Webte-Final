@@ -34,4 +34,6 @@ return [
     'split' => 'Split',
     'backend' => 'Backend',
     'frontend' => 'Frontend',
+    'clear_confirm' => 'Are you sure you want to clear all history?',
+    'Clear_All_History' => 'Clear all History',
 ];

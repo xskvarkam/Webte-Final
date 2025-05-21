@@ -90,5 +90,6 @@ Route::middleware(['auth', AdminMiddleware::class])
     ->group(function () {
         Route::get('/history', [HistoryLogController::class, 'index'])->name('admin.history.index');
         Route::get('/history/export', [HistoryLogController::class, 'export'])->name('admin.history.export');
+        Route::delete('/admin/history/clear', [HistoryLogController::class, 'clear'])->name('admin.history.clear');
     });
 require __DIR__.'/auth.php';

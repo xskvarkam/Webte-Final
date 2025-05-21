@@ -96,6 +96,7 @@
                     </x-responsive-nav-link>
                 @endif
             @endauth
+            
         </div>
 
         <!-- Responsive Settings Options -->

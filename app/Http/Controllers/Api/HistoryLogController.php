@@ -21,4 +21,13 @@ class HistoryLogController extends Controller
 
         return response()->json(['status' => 'ok']);
     }
+    public function clear()
+    {
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
+        \App\Models\HistoryLog::truncate(); // or ->delete() if you want to fire model events
+        return redirect()->route('admin.history.index')->with('success', 'History cleared.');
+    }
 }
