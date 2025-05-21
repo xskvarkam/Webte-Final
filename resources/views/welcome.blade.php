@@ -14,7 +14,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 1rem; /* aby sa to nelepilo na okraj */
+            box-sizing: border-box;
         }
 
         .container {
@@ -24,6 +26,8 @@
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
             position: relative;
+            max-width: 400px;
+            width: 100%;
         }
 
         .lang-switch {
@@ -40,31 +44,54 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 800;
             margin-bottom: 1rem;
+            word-break: break-word;
         }
 
         p {
             font-size: 1rem;
             color: #cbd5e1;
             margin-bottom: 2rem;
+            padding: 0 0.5rem;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
         }
 
         .buttons a {
-            margin: 0 0.5rem;
-            display: inline-block;
+            display: block;
+            width: 100%;
             padding: 0.6rem 1.2rem;
             background-color: #3b82f6;
             color: #fff;
             border-radius: 6px;
             font-weight: 600;
             text-decoration: none;
+            text-align: center;
             transition: background-color 0.2s ease;
         }
 
         .buttons a:hover {
             background-color: #2563eb;
+        }
+
+        @media (min-width: 500px) {
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .buttons a {
+                width: auto;
+                min-width: 120px;
+            }
         }
     </style>
 </head>
@@ -72,7 +99,6 @@
 <div class="container">
     <div class="lang-switch">
         <a href="{{ route('set-locale', ['locale' => 'sk']) }}">| SK |</a>
-
         <a href="{{ route('set-locale', ['locale' => 'en']) }}">| EN |</a>
     </div>
 

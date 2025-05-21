@@ -20,14 +20,14 @@
         }
 
         .tool-card {
-            background-color: white;
-            color: 0 0 10px 4px rgba(49, 130, 206, 0.4);
+            background-color: #2d3748;
+            color: white;
             padding: 2rem;
             border-radius: 16px;
             text-align: center;
             font-size: 1.2rem;
             font-weight: 600;
-            box-shadow: white;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
             text-decoration: none;
             display: flex;
@@ -38,10 +38,9 @@
         }
 
         .tool-card:hover {
-            background-color: white;
-            color: #1a202c;
-            box-shadow: 0 0 10px 4px rgba(49, 130, 206, 0.4); /* soft blue outline */
-            transform: scale(1.05);
+            background-color: #4a5568;
+            transform: scale(1.03);
+            box-shadow: 0 0 12px rgba(49, 130, 206, 0.3);
         }
 
         .tool-icon {
@@ -52,8 +51,8 @@
 
         .tool-label {
             font-size: 1rem;
+            color: #edf2f7;
         }
-
     </style>
 
     <div class="tool-grid">
@@ -100,7 +99,5 @@
                 <span class="tool-label">{{ __('pdf_tools.tools.' . $tool['key']) }}</span>
             </a>
         @endforeach
-
-
     </div>
 </x-app-layout>

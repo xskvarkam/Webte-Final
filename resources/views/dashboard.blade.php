@@ -17,6 +17,14 @@
     </x-slot>
 
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a202c;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
         .dashboard-box {
             background-color: #2d3748;
             color: white;
@@ -68,7 +76,7 @@
                 padding: 1.5rem 1rem;
             }
 
-            .dashboard-box h1 { 
+            .dashboard-box h1 {
                 font-size: 1.5rem;
             }
 
@@ -100,7 +108,7 @@
             max-width: 900px;
             width: 90%;
             max-height: 80vh;
-            overflow-y: auto; 
+            overflow-y: auto;
             position: relative;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
         }
@@ -121,72 +129,78 @@
         .modal-close:hover {
             color: #000;
         }
+        .dashboard-wrapper {
+            padding: 2rem 1rem 2rem; /* top right/left bottom */
+        }
+
     </style>
 
+    <div class="dashboard-wrapper">
+        <div class="dashboard-box">
+            <h1>{{ __('dashboard.heading') }}</h1>
+            <p>{{ __('dashboard.description') }}</p>
+            <a href="{{ route('pdf.index') }}">➤ {{ __('dashboard.button') }}</a>
 
-    <div class="dashboard-box">
-        <h1>{{ __('dashboard.heading') }}</h1>
-        <p>{{ __('dashboard.description') }}</p>
-        <a href="{{ route('pdf.index') }}">➤ {{ __('dashboard.button') }}</a>
+        </div>
+        <div class="dashboard-box">
+            <h1>{{ __('dashboard.docs_heading') }}</h1>
+            <p>{{ __('dashboard.docs_description') }}</p>
+            <a href="/docs">➤ {{ __('dashboard.docs_button') }}</a>
+        </div>
+        <div class="dashboard-box" x-data="{ showModal: false } ">
+            <h1>{{ __('dashboard.instructions_heading') }}</h1>
+            <p>{{ __('dashboard.instructions_description') }}</p>
 
-    </div>
-    <div class="dashboard-box">
-        <h1>{{ __('dashboard.docs_heading') }}</h1>
-        <p>{{ __('dashboard.docs_description') }}</p>
-        <a href="/docs">➤ {{ __('dashboard.docs_button') }}</a>
-    </div>
-    <div class="dashboard-box" x-data="{ showModal: false }">
-        <h1>{{ __('dashboard.instructions_heading') }}</h1>
-        <p>{{ __('dashboard.instructions_description') }}</p>
-    
-        <a @click="showModal = true" style="margin-top: 1rem; color: white; cursor: pointer;">
-            ➤ {{ __('dashboard.instructions_button') }}
-        </a>
-    
-        <!-- Modal Overlay -->
-        <div x-show="showModal" x-cloak class="modal-overlay" @keydown.escape.window="showModal = false">
-            <!-- Modal Box -->
-            <div class="modal-box" @click.away="showModal = false">
-                <button @click="showModal = false" class="modal-close">&times;</button>
-                <h1>{{ __('dashboard.instructions_heading') }}:</h1>
-                <div id="instructions-content">
-                    <p style="color: black;">{{ __('dashboard.instructions_edit') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_merge') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_split') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_delete') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_extract') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_rotate') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_watermark') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_compress') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_reverse') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_sign') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_PDFtoImg') }}</p>
-                    <p style="color: black;">{{ __('dashboard.instructions_PDFfromImg') }}</p>
+            <a @click="showModal = true" style="margin-top: 1rem; color: white; cursor: pointer;">
+                ➤ {{ __('dashboard.instructions_button') }}
+            </a>
+
+            <!-- Modal Overlay -->
+            <div x-show="showModal" x-cloak class="modal-overlay" @keydown.escape.window="showModal = false">
+                <!-- Modal Box -->
+                <div class="modal-box" @click.away="showModal = false">
+                    <button @click="showModal = false" class="modal-close">&times;</button>
+                    <h1>{{ __('dashboard.instructions_heading') }}:</h1>
+                    <div id="instructions-content">
+                        <p style="color: black;">{{ __('dashboard.instructions_edit') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_merge') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_split') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_delete') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_extract') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_rotate') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_watermark') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_compress') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_reverse') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_sign') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_PDFtoImg') }}</p>
+                        <p style="color: black;">{{ __('dashboard.instructions_PDFfromImg') }}</p>
+                    </div>
+                    <button
+                        id="download-instructions"
+                        style="margin-top: 1.5rem; background: #3182ce; color: white; border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-weight: bold; cursor: pointer;"
+                        type="button"
+                    >
+                        {{ __('dashboard.download_instructions_button') ?? 'Download Instructions as PDF' }}
+                    </button>
                 </div>
-                <button
-                    id="download-instructions"
-                    style="margin-top: 1.5rem; background: #3182ce; color: white; border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-weight: bold; cursor: pointer;"
-                    type="button"
-                >
-                    {{ __('dashboard.download_instructions_button') ?? 'Download Instructions as PDF' }}
-                </button>
+
             </div>
-            
         </div>
     </div>
-    
+
+
     <script>
         document.addEventListener('alpine:init', () => {
             // Wait for Alpine to be ready
             document.getElementById('download-instructions')?.addEventListener('click', function () {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-    
+
                 // Get the instructions
                 const instructions = Array.from(
                     document.querySelectorAll('#instructions-content p')
                 ).map(p => p.textContent);
-    
+
                 // Title
                 doc.setFontSize(18);
                 doc.text(
@@ -195,7 +209,7 @@
                     20,
                     { align: 'center' }
                 );
-    
+
                 // Instructions
                 doc.setFontSize(12);
                 let y = 35;
@@ -208,13 +222,13 @@
                         y = 20;
                     }
                 });
-    
+
                 doc.save('instructions.pdf');
             });
         });
     </script>
-    
-    
-    
+
+
+
 </x-app-layout>
 
